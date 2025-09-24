@@ -93,7 +93,25 @@ INSERT INTO silver.crm_prd_info (
 			) AS prd_end_dt -- Calculate end date as one day before the next start date
 		FROM bronze.crm_prd_info
 
+-- We need to change the data type of date as they are int type so before inserting the data we are going to change the data types in the table 
 
+
+IF OBJECT_ID('silver.crm_sales_details', 'U') IS NOT NULL
+    DROP TABLE silver.crm_sales_details;
+CREATE TABLE silver.crm_sales_details (
+    sls_ord_num NVARCHAR(50),
+    sls_prd_key NVARCHAR(50),
+    sls_cust_id INT,
+    sls_order_dt DATE,
+    sls_ship_dt DATE,
+    sls_due_dt DATE,
+    sls_sales INT,
+    sls_quantity INT,
+    sls_price INT,
+    dwh_create_date DATETIME2 DEFAULT GETDATE()
+);
+
+	
 
 -- insert into crm_sales_details 
 
